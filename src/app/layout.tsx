@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import React from 'react';
 import "./globals.css";
 
 export const metadata = {

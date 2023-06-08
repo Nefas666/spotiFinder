@@ -1,4 +1,5 @@
 'use client'
+import React from "react";
 import { Card } from "@tremor/react";
 import Header from './components/Header'
 import Chart from './components/Chart'
@@ -54,7 +55,7 @@ function Home() {
 
         <Header />
         <Chart />
-        <Revenue />
+        <Revenue/>
         {playlists.map((playlist) => (
           <Card key={playlist.id}>
             <div className="h-80">
