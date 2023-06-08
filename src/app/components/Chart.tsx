@@ -51,8 +51,8 @@ export default function ChartView() {
     };
 
     return (
-        <Card>
-            <div className="md:flex justify-between">
+        <Card className="bg-slate-900">
+            <div className="md:flex justify-between bg-slate-800">
                 <div>
                     <Flex
                         justifyContent="start"

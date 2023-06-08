@@ -1,6 +1,6 @@
 import { Card, Metric, Text, Icon, Flex } from "@tremor/react";
 import React from "react";
-import { MusicalNoteIcon, PlayIcon, TicketIcon } from "@heroicons/react/24/outline";
+import { MusicalNoteIcon, PlayIcon, TicketIcon, UserCircleIcon, ListBulletIcon } from "@heroicons/react/24/outline";
 import { JsxElement } from "typescript";
 
 interface Categories  {
@@ -12,7 +12,7 @@ interface Categories  {
 const categories = [
   {
     title: "Tracks",
-    metric: "23,456,456",
+    metric: "23.456",
     icon: MusicalNoteIcon,
     color: "purple",
   },
@@ -28,21 +28,34 @@ const categories = [
     icon: PlayIcon,
     color: "red",
   },
+  {
+    title: "Artists",
+    metric: "120",
+    icon: UserCircleIcon,
+    color: "purple",
+  },
+  {
+    title: "Playlist",
+    metric: "20",
+    icon: ListBulletIcon,
+    color: "yellow",
+  },
+  
 ];
 function Header() {
   return (
-    <>
+    <div className="flex flex-col justify-between items-start gap-y-4 gap-x-4 mt-8">
       {categories.map((item) => (
-        <Card key={item.title} decoration="top">
+        <Card className="bg-slate-800" key={item.title} decoration="top">
           <Flex className="justify-start gap-x-8">
             <Icon icon={item.icon} variant="simple" size="sm"/>
-              <Text>{item.title}</Text>
-              <Metric>{item.metric}</Metric>
+              <Text className="text-emerald-500">{item.title}</Text>
+              <Metric className="text-white">{item.metric}</Metric>
           </Flex>
         </Card>
       ))}
 
-    </>
+    </div>
     
   );
 }
