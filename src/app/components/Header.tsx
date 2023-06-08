@@ -1,5 +1,5 @@
 import { Card, Metric, Text, Icon, Flex } from "@tremor/react";
-
+import React from "react";
 import { MusicalNoteIcon, PlayIcon, TicketIcon } from "@heroicons/react/24/outline";
 import { JsxElement } from "typescript";
 
