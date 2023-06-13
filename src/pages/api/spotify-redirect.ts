@@ -4,7 +4,7 @@ import spotifyApi from '../../app/spotify';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const scopes = ['user-read-private', 'user-read-email']; // Add any additional scopes you need
-  const redirectUri = 'http://localhost:3000/callback'; // Your callback URL
+  const redirectUri = process.env.SPOTIFY_CALLBACK_ENDPOINT_PROD; // Your callback URL
 
   const queryParams = {
     response_type: 'code',
