@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import spotifyApi from '../app/spotify';
+//import spotifyApi from '../app/spotify';
 
 function Callback() {
   const router = useRouter();
@@ -28,12 +28,12 @@ function Callback() {
         if (response.ok) {
           const { access_token } = await response.json();
           
-          spotifyApi.setAccessToken(access_token);
-          console.log(access_token);
+          //spotifyApi.setAccessToken(access_token);
+          //console.log(access_token);
 
           // Redirect to your main app page
           router.push('/');
-          localStorage.setItem('access_token', `${access_token}`);
+          localStorage.setItem('access_token', access_token);
         }
       }
     }

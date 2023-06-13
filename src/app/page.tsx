@@ -26,13 +26,15 @@ interface Playlist {
 
 function Home() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const [userName, setUserName] = useState<string>('');
 
   useEffect(() => {
     const accessToken = localStorage.getItem('access_token');
     console.log(accessToken);
+    
 
     if (accessToken) {
-      getUserPlaylists(`${accessToken}`)
+      getUserPlaylists(accessToken, userName)
         .then((playlists) => {
           console.log(playlists);
           setPlaylists(playlists);
@@ -41,9 +43,18 @@ function Home() {
           console.error('Error retrieving playlists:', error);
         });
     }
+  }, [userName]);
+
+  useEffect(() => {
+    const storedUserName = localStorage.getItem('user_name');
+    if (storedUserName) {
+      setUserName(storedUserName);
+    }
   }, []);
 
-
+  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(event.target.value);
+  };
   return (
     <div className="App container mx-auto p-4 lg:p-0">
       <Grid  className="lg:p-8 p-0 mx-auto grid grid-cols-1 lg:grid-cols-3">
@@ -53,6 +64,17 @@ function Home() {
             <h2 className="mt-2 text-4xl font-bold tracking-tight text-white sm:text-6xl">
               SpotyFinder
             </h2>
+            <div className="mt-4 text-white">
+        <label htmlFor="username">Enter username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          className="bg-transparent text-white"
+          value={userName}
+          onChange={handleUserNameChange}
+        />
+      </div>
             <Link className="text-emerald-500 text-lg hover:underline hover:decoration-emerald-500 font-bold" href="/api/spotify-redirect" target="_blank">Connect to your spotify account</Link>
             <Header />
             <Platform />
