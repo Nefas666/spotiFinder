@@ -13,7 +13,7 @@ function Callback() {
         const body = new URLSearchParams();
         body.append('grant_type', 'authorization_code');
         body.append('code', code);
-        body.append('redirect_uri', 'http://localhost:3000/callback');
+        body.append('redirect_uri', process.env.SPOTIFY_CALLBACK_ENDPOINT_PROD || '');
         body.append('client_id', process.env.SPOTIFY_CLIENT_ID || '');
         body.append('client_secret', process.env.SPOTIFY_CLIENT_SECRET || '');
 
