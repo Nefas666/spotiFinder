@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Tracks",
+    "metric": "23.456",
+    "icon": "MusicalNoteIcon",
+    "color": "purple"
+  },
+  {
+    "title": "Shows",
+    "metric": "13",
+    "icon": "TicketIcon",
+    "color": "yellow"
+  },
+  {
+    "title": "Plays",
+    "metric": "456",
+    "icon": "PlayIcon",
+    "color": "red"
+  },
+  {
+    "title": "Artists",
+    "metric": "120",
+    "icon": "UserCircleIcon",
+    "color": "purple"
+  },
+  {
+    "title": "Playlist",
+    "metric": "20",
+    "icon": "ListBulletIcon",
+    "color": "yellow"
+  }
+]
