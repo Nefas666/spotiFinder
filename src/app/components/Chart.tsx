@@ -67,7 +67,6 @@ export default function ChartView() {
                             color="emerald"
                         />
                     </Flex>
-                    {/* <Text> Daily increase or decrease per domain </Text> */}
                 </div>
                 <div className="mt-6 md:mt-0">
                     <Toggle

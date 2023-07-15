@@ -1,15 +1,14 @@
 'use client'
 import React from "react";
-import { Grid, Col, Card, Text, Metric } from "@tremor/react";
+import { useEffect, useState } from 'react';
+import { Grid, Col, Card } from "@tremor/react";
 
 import Header from './components/Header'
 import Chart from './components/Chart'
 import Revenue from './components/Revenue'
 import Link from 'next/link';
-// import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { getUserPlaylists } from '../pages/api/spotify-playlist';
 import Platform from "./components/Platform";
+import { getUserPlaylists } from '../pages/api/spotify-playlist';
 
 
 interface Playlist {
@@ -20,9 +19,6 @@ interface Playlist {
   tracks: { total: string };
   external_urls: { spotify: string };
 }
-
-
-
 
 function Home() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
