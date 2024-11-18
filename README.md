@@ -11,13 +11,13 @@ Before getting started, make sure you have [Node.js](https://nodejs.org) install
 git clone https://github.com/Nefas666/spotiFinder.git
 ````
 
-2. Navigate to the project's directory:
+2. Navigate to project's directory:
 
 ```bash
-cd nextjs-tailwind-tremor
+cd spotifinder
 ```
 
-3. Install the dependencies:
+3. Install all dependencies:
 
 ```bash
 npm install

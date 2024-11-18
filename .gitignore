@@ -95,6 +95,7 @@ out
 dist
 .next
 next-env.d.ts
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
@@ -133,3 +134,6 @@ next-env.d.ts
 .yarn/install-state.gz
 .pnp.*
 node_modules
+
+# responses
+src/app/response.json
