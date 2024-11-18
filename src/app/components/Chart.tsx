@@ -8,8 +8,6 @@ import {
     Icon,
     Text,
     Title,
-    Toggle,
-    ToggleItem,
 } from "@tremor/react";
 import {InformationCircleIcon} from "@heroicons/react/20/solid";
 
@@ -69,15 +67,7 @@ export default function ChartView() {
                     </Flex>
                 </div>
                 <div className="mt-6 md:mt-0">
-                    <Toggle
-                        color="zinc"
-                        defaultValue={selectedKpi}
-                        onValueChange={(value) => setSelectedKpi(value)}
-                    >
-                        <ToggleItem value="Tracks" text="Tacks" />
-                        <ToggleItem value="Shows" text="Shows" />
-                        <ToggleItem value="Plays" text="Plays" />
-                    </Toggle>
+                   
                 </div>
             </div>
             <AreaChart
