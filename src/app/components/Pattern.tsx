@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Pattern = () => {
   return (
     <StyledWrapper>
-      <div className="container-pattern w-screen h-sceen absolute t-0 l-0" />
+      <div className="container-pattern w-screen h-sceen absolute t-0 l-0 -z-10 after:bg-slate-700 after:opacity-45" />
     </StyledWrapper>
   );
 }
@@ -17,7 +17,7 @@ const StyledWrapper = styled.div`
     height: 100%;
     --s: 300px; /* control the size */
     --c1: #44FFD2;
-    --c2: #355c7d;
+    --c2: #000;
 
     --_g: var(--c2) 4% 14%, var(--c1) 14% 24%, var(--c2) 22% 34%,
       var(--c1) 34% 44%, var(--c2) 44% 56%, var(--c1) 56% 66%, var(--c2) 66% 76%,
