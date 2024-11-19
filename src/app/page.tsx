@@ -89,7 +89,7 @@ function Home() {
               <Link className="card-button font-mono" href="/api/spotify-redirect" target="self">Connect to your spotify account</Link>
             </div>
           </Col>
-            <h2 className="mt-2 font-mono text-4xl font-bold tracking-tight text-white">{userName}'s favourite playlists:</h2>
+            <h2 className="mt-2 font-mono text-4xl font-bold tracking-tight text-white">{userName} favourite playlists:</h2>
           <Col numColSpanSm={1} numColSpanLg={5} className="flex flex-wrap items-center justify-between gap-y-4 mt-8">
             {playlists.map((playlist) => (
               <PlaylistCard key={playlist.id} playlist={playlist} />
