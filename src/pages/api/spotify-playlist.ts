@@ -1,10 +1,9 @@
 import axios from 'axios';
 
 const baseURL = 'https://api.spotify.com/v1';
-//const userName = {userName}
 
 export async function getUserPlaylists(accessToken: string, userName: string) {
-    const playlistsEndpoint = `/users/${userName}/playlists`;
+    const playlistsEndpoint = `/users/${userName}/playlists?offset=0&limit=5`;
   
     const headers = {
       Authorization: `Bearer ${accessToken}`,
