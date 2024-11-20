@@ -53,7 +53,7 @@ function Home() {
           console.error('Error retrieving recently played tracks:', error);
         });
     }
-  }, []);
+  }, [userName]);
 
   useEffect(() => {
     const storedUserName = localStorage.getItem('user_name');
@@ -63,7 +63,9 @@ function Home() {
   }, []);
 
   const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(event.target.value);
+    const newUserName = event.target.value;
+    setUserName(newUserName);
+    localStorage.setItem('user_name', newUserName);
   };
   return (
 
