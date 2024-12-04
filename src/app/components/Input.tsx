@@ -32,7 +32,6 @@ const Input: React.FC<InputProps> = ({ label, type = "text", placeholder = "Ente
 const StyledWrapper = styled.div`
 .brutalist-container {
   position: relative;
-  width: 250px;
   font-family: monospace;
 }
 

@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
     return (
         <html lang="en">
-            <body className="w-100 h-100 relative z-0">
+            <body className="w-100 h-100 relative">
                 {children}
             </body>
         </html>

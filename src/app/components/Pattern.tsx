@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Pattern = () => {
   return (
     <StyledWrapper>
-      <div className="container-pattern w-screen h-sceen absolute t-0 l-0 -z-10 after:bg-slate-700 after:opacity-45" />
+      <div className="container-pattern w-screen h-sceen absolute t-0 l-0 -z-10" />
     </StyledWrapper>
   );
 }

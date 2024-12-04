@@ -1,8 +1,6 @@
 'use client'
 import React from "react";
 import { useEffect, useState } from 'react';
-import { Grid, Col, Card } from "@tremor/react";
-
 import Link from 'next/link';
 import { getUserPlaylists } from '../pages/api/spotify-playlist';
 import { getRecentlyPlayed } from '../pages/api/spotify-recently-played';
@@ -10,6 +8,9 @@ import TrackCard from './components/TrackCard';
 import PlaylistCard from "./components/PlaylistCard";
 import Pattern from "./components/Pattern";
 import Input from "./components/Input";
+import Flag from "./components/Flag";
+import Alert from "./components/Alert";
+
 
 
 
@@ -26,41 +27,50 @@ function Home() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [userName, setUserName] = useState<string>('');
   const [recentlyPlayed, setRecentlyPlayed] = useState<any[]>([]);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
 
-
-  useEffect(() => {
+  const handleConnectAccount = async () => {
     const accessToken = localStorage.getItem('access_token');
-    console.log(accessToken);
-    console.log('userInfo', userName);
-    console.log('recent', recentlyPlayed);
+    const storedUserName = localStorage.getItem('user_name');
 
-    if (accessToken) {
-      getUserPlaylists(accessToken, userName)
-        .then((playlists) => {
-          console.log(playlists);
-          setPlaylists(playlists);
-        })
-        .catch((error) => {
-          console.error('Error retrieving playlists:', error);
-        });
-
-      getRecentlyPlayed(accessToken, userName)
-        .then((recentTracks) => {
-          console.log(recentTracks);
-          setRecentlyPlayed(recentTracks);
-        })
-        .catch((error) => {
-          console.error('Error retrieving recently played tracks:', error);
-        });
+    if (accessToken && storedUserName) {
+      await fetchUserProfile(accessToken);
+      try {
+        const playlists = await getUserPlaylists(accessToken, storedUserName);
+        setPlaylists(playlists);
+      } catch (error) {
+        console.error('Error retrieving playlists:', error);
+      }
+    } else {
+      alert("Please connect your Spotify account first.");
     }
-  }, [userName]);
+  };
 
   useEffect(() => {
     const storedUserName = localStorage.getItem('user_name');
+
     if (storedUserName) {
       setUserName(storedUserName);
     }
   }, []);
+
+
+
+  const fetchUserProfile = async (accessToken: string) => {
+    try {
+      const result = await fetch("https://api.spotify.com/v1/me", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      });
+      const profileData: UserProfile = await result.json();
+      setProfile(profileData);
+      setIsConnected(true);
+      console.log(profileData);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
 
   const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newUserName = event.target.value;
@@ -70,17 +80,28 @@ function Home() {
   return (
 
     <>
-    <div className="flex flex-col justify-center items-stretc text-center">
+      <div className="flex flex-col justify-center text-center">
 
-      <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-mono bg-black py-4">
-        SpotyFinder
-      </h2>
-      <p>Connect your Spotify account or search other user accounts easily to display public information such as the recently played tracks, the most favourite playlists and more!</p>
-    </div>
+        <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-mono bg-black py-4">
+          SpotyFinder
+        </h2>
+        <p>Connect your Spotify account or search other user accounts easily to display public information.</p>
+        {profile && (
+          <div className="mt-4 font-mono text-black flex flex-col justify-center">
+            <h3 className="text-2xl font-bold">{profile.display_name}</h3>
+            <img src={profile.images[0]?.url} alt="User Avatar" className="rounded-full w-24 h-24 mx-auto" />
+            <div className="flex flex-row justify-center items-baseline gap-4"><p>Country:</p><Flag country={profile.country} /></div>
+            <p>Email: {profile.email}</p>
+            <a href="{profile.external_urls?.spotify}" target="_blank" className="underline">Spotify URL: {profile.external_urls.spotify}</a>
+            <p>Followers: {profile.followers.total}</p>
+          </div>
+        )}
+
+      </div>
       <Pattern />
       <div className="container mx-auto p-4 lg:p-0 relative">
-        <Grid className="lg:p-8 p-0 mx-auto grid grid-cols-1 lg:grid-cols-3">
-          <Col numColSpanLg={1} numColSpanSm={3}>
+        <div className="lg:p-8 p-0 mx-auto grid grid-cols-1">
+          <div className="row-span-full">
             <div className="mt-4 text-white flex flex-col gap-4">
               <Input
                 label="Your Spotify username:"
@@ -88,27 +109,35 @@ function Home() {
                 onChange={handleUserNameChange}
                 placeholder=""
               />
-              <Link className="card-button font-mono" href="/api/spotify-redirect" target="self">Connect to your spotify account</Link>
+              <button className="card-button font-mono" onClick={handleConnectAccount}>
+                Connect to your Spotify account
+              </button>
+              {isConnected && (
+                <Alert message={()=>"test"} />
+              )
+            }
+
+              {/* <Link className="card-button font-mono" href="/api/spotify-redirect" target="self">Connect to your spotify account</Link> */}
             </div>
-          </Col>
-            <h2 className="mt-2 font-mono text-4xl font-bold tracking-tight text-white">{userName} favourite playlists:</h2>
-          <Col numColSpanSm={1} numColSpanLg={5} className="flex flex-wrap items-center justify-between gap-y-4 mt-8">
+          </div>
+          <h2 className="mt-2 font-mono text-4xl font-bold tracking-tight text-white bg-black p-1">{userName} top 5 playlists:</h2>
+          <div className="flex flex-wrap justify-between gap-x-1 gap-1">
             {playlists.map((playlist) => (
               <PlaylistCard key={playlist.id} playlist={playlist} />
             ))}
-          </Col>
-        </Grid>
-
-        <div className="mt-8 font-mono">
-          <h2 className="mt-2 text-4xl font-bold tracking-tight text-white">Recently Played Tracks</h2>
-          {recentlyPlayed.length > 0 ? (
-            recentlyPlayed.map((item, index) => (
-              <TrackCard key={index} track={item.track} />
-            ))
-          ) : (
-            <p className="text-white">No recently played tracks available.</p>
-          )}
+          </div>
+          {/* <div className="mt-8 font-mono">
+            <h2 className="mt-2 text-4xl font-bold tracking-tight text-white bg-black p-1">Recently Played Tracks</h2>
+            {recentlyPlayed.length > 0 ? (
+              recentlyPlayed.map((item, index) => (
+                <TrackCard key={index} track={item.track} />
+              ))
+            ) : (
+              <p className="text-white bg-black">No recently played tracks available.</p>
+            )}
+          </div> */}
         </div>
+
       </div>
     </>
   );

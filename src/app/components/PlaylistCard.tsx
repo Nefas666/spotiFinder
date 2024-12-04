@@ -17,9 +17,9 @@ interface PlaylistCardProps {
 const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist }) => {
   return (
     <StyledWrapper>
-      <div className="card font-mono">
-        <h2 className="card__title">{playlist.name}</h2>
-        <p className="card__content">{playlist.description}</p>
+      <div className="card font-mono flex flex-col gap-1 justify-stretch">
+        <h2 className="card__title font-medium">{playlist.name}</h2>
+        {/* <p className="card__content">{playlist.description}</p> */}
         <p className="card__tracks">Total Tracks: {playlist.tracks.total}</p>
         <a className="card__link" target="_blank" rel="noopener noreferrer" href={playlist.external_urls.spotify}>
           View Playlist
@@ -41,6 +41,8 @@ const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist }) => {
 const StyledWrapper = styled.div`
   .card {
     width: 300px;
+    max-height:245px;
+    height:100%;
     padding: 20px;
     background:  #44FFD2;
     color: black;
@@ -62,12 +64,10 @@ const StyledWrapper = styled.div`
 
   .card__content {
     font-size: 14px;
-    margin-bottom: 10px;
   }
 
   .card__tracks {
     font-size: 14px;
-    margin-bottom: 10px;
   }
 
   .card__link {
@@ -80,7 +80,6 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: row;
     gap: 10px;
-    margin-top: 10px;
   }
 
   .card__image {
