@@ -8,10 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
-  
-    "resolutions": {
-      "styled-components": "^5"
-    },
+  "resolutions": {
+    "styled-components": "^5"
+  },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "@tremor/react": "^3.18.3",
@@ -24,7 +23,9 @@
     "eslint-config-next": "15.0.2",
     "next": "^15.0.2",
     "react": "18.3.1",
+    "react-country-flags-lazyload": "^1.0.9",
     "react-dom": "18.3.1",
+    "react-toastify": "^10.0.6",
     "spotify-web-api-js": "^1.5.2",
     "styled-components": "^6.1.13",
     "typescript": "^5.6.3"
